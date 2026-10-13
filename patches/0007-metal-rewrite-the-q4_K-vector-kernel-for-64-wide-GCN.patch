@@ -1,0 +1,99 @@
+From 98e132e6cb863b7cb30bbc1c8c976954ae71aac7 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:59:33 +0200
+Subject: [PATCH 7/8] metal: rewrite the q4_K vector kernel for 64-wide GCN
+ (optional)
+
+Performance only. Eight threads per superblock; the 16 quant bytes and the
+header (d, dmin, 12 scale bytes) are each loaded as one uint4, and y is
+shared by all rows. N_R0_Q4_K goes from 2 to 8.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/ggml-metal-impl.h         |  2 +-
+ .../matmul/kernel-scalar-kquant.metal         | 49 +++++++++++++++++++
+ 2 files changed, 50 insertions(+), 1 deletion(-)
+
+diff --git a/ggml/src/ggml-metal/ggml-metal-impl.h b/ggml/src/ggml-metal/ggml-metal-impl.h
+index 368ef45..0803501 100644
+--- a/ggml/src/ggml-metal/ggml-metal-impl.h
++++ b/ggml/src/ggml-metal/ggml-metal-impl.h
+@@ -32,7 +32,7 @@
+ #define N_R0_Q3_K 2
+ #define N_SG_Q3_K 2
+ 
+-#define N_R0_Q4_K 2
++#define N_R0_Q4_K 8
+ #define N_SG_Q4_K 2
+ 
+ #define N_R0_Q5_K 2
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+index 850e318..1a747a6 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+@@ -383,6 +383,53 @@ void kernel_mul_mv_q4_K_f32_impl(
+     // sc8 declared locally within the row loop to avoid potential
+     // thread-private aliasing issues on Intel Metal at NW<32
+ 
++    if (NW == 64) {
++        // 64-wide GCN: 8 threads per superblock, the 16 quant bytes in one uint4,
++        // the header (d, dmin, 12 scale bytes) in one uint4; y is shared by all rows
++        const short ix = eff_tiisg/8;          // 0..7: superblock within the step
++        const short it = eff_tiisg%8;
++        const short jq = it/2;                 // 0..3: 64-element chunk
++        const short hq = it%2;                 // 0..1: half of the chunk
++        const uint  sh = 16*(jq & 1);
++        const bool  lo = jq < 2;
++        constexpr uint M4 = 0x0F0F0F0Fu;
++
++        for (int ib = ix; ib < nb; ib += 8) {
++            device const float * yb = y + ib*QK_K + 64*jq + 16*hq;
++            float4 yl[4], yh[4];
++            float ysl = 0.f, ysh = 0.f;
++            for (short k = 0; k < 4; ++k) {
++                yl[k] = *(device const float4 *)(yb +      4*k);
++                yh[k] = *(device const float4 *)(yb + 32 + 4*k);
++                ysl += yl[k].x + yl[k].y + yl[k].z + yl[k].w;
++                ysh += yh[k].x + yh[k].y + yh[k].z + yh[k].w;
++            }
++
++            device const char * xb = (device const char *)(x + ib);
++            const short nrv = min((int)nr0, (int)args.ne01 - first_row);   // do not read past the last row
++            for (short row = 0; row < nrv; row++) {
++                const uint4 hd = *(device const uint4 *)(xb);
++                const uint4 q  = *(device const uint4 *)(xb + 16 + 32*jq + 16*hq);
++
++                const float2 dm = float2(as_type<half2>(hd.x));
++                const uint ua = (hd.y >> sh) & 0xffffu;
++                const uint ub = (hd.z >> sh) & 0xffffu;
++                const uint uc = (hd.w >> sh) & 0xffffu;
++                const uint scp = lo ? (ua & 0x3f3fu) : ((uc & 0x0f0fu) | ((ua & 0xc0c0u) >> 2));
++                const uint mnp = lo ? (ub & 0x3f3fu) : (((uc >> 4) & 0x0f0fu) | ((ub & 0xc0c0u) >> 2));
++
++                const float sl = dot(yl[0], float4(as_type<uchar4>(q.x & M4))) + dot(yl[1], float4(as_type<uchar4>(q.y & M4)))
++                               + dot(yl[2], float4(as_type<uchar4>(q.z & M4))) + dot(yl[3], float4(as_type<uchar4>(q.w & M4)));
++                const float sg = dot(yh[0], float4(as_type<uchar4>((q.x >> 4) & M4))) + dot(yh[1], float4(as_type<uchar4>((q.y >> 4) & M4)))
++                               + dot(yh[2], float4(as_type<uchar4>((q.z >> 4) & M4))) + dot(yh[3], float4(as_type<uchar4>((q.w >> 4) & M4)));
++
++                sumf[row] = fma(dm.x, fma(float(scp & 0xffu), sl, float(scp >> 8) * sg),
++                            fma(-dm.y, fma(float(mnp & 0xffu), ysl, float(mnp >> 8) * ysh), sumf[row]));
++
++                xb += args.nb01;
++            }
++        }
++    } else {
+     for (short c = 0; c < chunks_per_thread; ++c) {
+         // Virtual tiisg for this chunk: step by NW each iteration
+         const short vtiisg = tiisg_base + c * NW;
+@@ -454,6 +501,8 @@ void kernel_mul_mv_q4_K_f32_impl(
+         }
+     }
+ 
++    }
++
+     device float * dst_f32 = (device float *) dst + (int64_t)im*args.ne0*args.ne1 + (int64_t)r1*args.ne0;
+ 
+     if (FC_mul_mv_shmem_reduce) {
+-- 
+2.37.1 (Apple Git-137.1)
+

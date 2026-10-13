@@ -1,0 +1,29 @@
+From f2f1291cef5797843098e4b1a948d26ae32c9f90 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:33:41 +0200
+Subject: [PATCH 1/8] ggml-backend: add missing #include <string>
+
+ggml-backend.cpp uses std::string (in a std::set<std::pair<...>>) without
+including <string>. With the macOS 12 Command Line Tools libc++ the build
+fails: "implicit instantiation of undefined template 'std::basic_string<char>'".
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-backend.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ggml/src/ggml-backend.cpp b/ggml/src/ggml-backend.cpp
+index 135464b..f5479c8 100644
+--- a/ggml/src/ggml-backend.cpp
++++ b/ggml/src/ggml-backend.cpp
+@@ -23,6 +23,7 @@
+ #include <set>
+ #include <utility>
+ #include <vector>
++#include <string>
+ 
+ #ifdef __APPLE__
+ #include <sys/types.h>
+-- 
+2.37.1 (Apple Git-137.1)
+

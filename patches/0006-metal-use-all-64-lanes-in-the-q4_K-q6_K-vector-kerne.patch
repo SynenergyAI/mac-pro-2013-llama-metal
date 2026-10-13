@@ -1,0 +1,78 @@
+From a3f96af229703e51fd7d2a20a6d650d23b184520 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:54:51 +0200
+Subject: [PATCH 6/8] metal: use all 64 lanes in the q4_K/q6_K vector kernels
+ (optional)
+
+Performance only. With NW = 64 the q4_K and q6_K vector kernels now step
+NW/16 superblocks at a time on all lanes instead of leaving lanes 32..63
+idle, and N_R0_Q6_K goes from 2 to 4.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/ggml-metal-impl.h              |  2 +-
+ .../ggml-metal/matmul/kernel-scalar-kquant.metal   | 14 ++++++++------
+ 2 files changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/ggml/src/ggml-metal/ggml-metal-impl.h b/ggml/src/ggml-metal/ggml-metal-impl.h
+index dd68074..368ef45 100644
+--- a/ggml/src/ggml-metal/ggml-metal-impl.h
++++ b/ggml/src/ggml-metal/ggml-metal-impl.h
+@@ -38,7 +38,7 @@
+ #define N_R0_Q5_K 2
+ #define N_SG_Q5_K 2
+ 
+-#define N_R0_Q6_K 2
++#define N_R0_Q6_K 4
+ #define N_SG_Q6_K 2
+ 
+ #define N_R0_IQ1_S 4
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+index 85de6ba..850e318 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+@@ -357,7 +357,8 @@ void kernel_mul_mv_q4_K_f32_impl(
+     // covers vtiisg NW..2*NW-1 (ix=1). Both chunks accumulate into sumf[].
+     // At NW=32 this is a single iteration (no-op change).
+     const short tiisg_base        = eff_tiisg;
+-    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
++    const short chunks_per_thread = (NW > 32) ? 1 : 32 / NW; // NW > 32: all lanes do work
++    const short NBG = (NW > 32) ? NW/16 : 2;                 // superblocks per step (2 for NW <= 32)
+ 
+     const int nb = args.ne00/QK_K;
+ 
+@@ -398,7 +399,7 @@ void kernel_mul_mv_q4_K_f32_impl(
+         const uint q_offset = 32*v_im + l0;
+         const uint y_offset = 64*v_im + l0;
+ 
+-        for (int ib = ix; ib < nb; ib += 2) {
++        for (int ib = ix; ib < nb; ib += NBG) {
+             device const float * yb = y + ib*QK_K + y_offset;
+ 
+             // 4 vec4 loads (16 floats per thread, half of old 32)
+@@ -716,9 +717,10 @@ void kernel_mul_mv_q6_K_f32_impl(
+     // At NW=16, eff_tiisg 0..15 → tid 0..7, missing tid 8..15.
+     // Fix: keep ix fixed (superblock stride=2), vary tid per chunk.
+     // chunks_per_thread = 32/NW ensures all 16 tid positions are covered.
+-    const short ix             = eff_tiisg % 2;   // superblock stride index (fixed per thread)
+-    const short tid_base       = eff_tiisg / 2;   // base tid position
+-    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
++    const short NSB            = (NW > 32) ? NW/16 : 2;  // superblocks per step (2 for NW <= 32)
++    const short ix             = eff_tiisg % NSB;   // superblock stride index (fixed per thread)
++    const short tid_base       = eff_tiisg / NSB;   // base tid position
++    const short chunks_per_thread = (NW > 32) ? 1 : 32 / NW; // NW > 32: all lanes do work
+ 
+     for (short c = 0; c < chunks_per_thread; ++c) {
+         // Virtual tid: steps by NW/2 each chunk to cover all 16 tid positions.
+@@ -733,7 +735,7 @@ void kernel_mul_mv_q6_K_f32_impl(
+         const short q_offset_l =  64*ip + l0;
+         const short q_offset_h =  32*ip + l0;
+ 
+-        for (int i = ix; i < nb; i += 2) {
++        for (int i = ix; i < nb; i += NSB) {
+             device const uint8_t * q1 = x[i].ql + q_offset_l;
+             device const uint8_t * q2 = q1 + 32;
+             device const uint8_t * qh = x[i].qh + q_offset_h;
+-- 
+2.37.1 (Apple Git-137.1)
+

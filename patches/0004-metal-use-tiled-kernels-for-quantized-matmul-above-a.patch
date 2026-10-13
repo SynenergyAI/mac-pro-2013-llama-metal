@@ -1,0 +1,60 @@
+From cf131365483a6bf2e86931e09e4d90bdcc27ab3c Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:46:20 +0200
+Subject: [PATCH 4/8] metal: use tiled kernels for quantized matmul above a
+ batch threshold
+
+On GPUs without matrix hardware, quantized matmuls always took the vector
+path although tiled kernels exist. On a FirePro D700 that path aborts for
+batch widths >= 320 (command buffer error) and is slow below that. Batch
+widths >= GGML_METAL_TILED_MIN_BATCH (intentional tunable, default 16) now
+use the tiled kernels.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/matmul/dispatch.cpp | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/ggml/src/ggml-metal/matmul/dispatch.cpp b/ggml/src/ggml-metal/matmul/dispatch.cpp
+index 34e8ad2..af59cfe 100644
+--- a/ggml/src/ggml-metal/matmul/dispatch.cpp
++++ b/ggml/src/ggml-metal/matmul/dispatch.cpp
+@@ -1,6 +1,7 @@
+ // Host-side dispatch: selects kernel pattern (scalar/tiled/mm) and type variant for MUL_MAT.
+ // Encodes Metal command buffer with the chosen kernel, args, and threadgroup config.
+ #include "../ops/ggml-metal-ops-internal.h"
++#include <cstdlib>
+ 
+ // Maps ggml_type to the suffix used in tiled kernel host_name instantiations.
+ // Each entry corresponds to a `template [[host_name("kernel_mul_mat_tiled_<suffix>")]]`
+@@ -38,6 +39,10 @@ static const char * tiled_type_suffix(enum ggml_type type) {
+ int ggml_metal_op_mul_mat(ggml_metal_op_t ctx, int idx) {
+     ggml_tensor * op = ctx->node(idx);
+ 
++    // On GPUs without matrix hardware, quantized matmuls with batch width >= this threshold use the
++    // tiled kernels. Intentional tunable via GGML_METAL_TILED_MIN_BATCH (default 16).
++    static const int tiled_min_batch = getenv("GGML_METAL_TILED_MIN_BATCH") ? atoi(getenv("GGML_METAL_TILED_MIN_BATCH")) : 16;
++
+     ggml_metal_library_t lib = ctx->lib;
+     ggml_metal_encoder_t enc = ctx->enc;
+ 
+@@ -79,14 +84,14 @@ int ggml_metal_op_mul_mat(ggml_metal_op_t ctx, int idx) {
+            op->src[0]->type == GGML_TYPE_Q8_0 ||
+            op->src[0]->type == GGML_TYPE_MXFP4 ||
+            op->src[0]->type == GGML_TYPE_IQ4_NL ||
+-           false) && (ne11 >= 2 && (ne11 <= ne11_mm_min || (!profile->has_matrix_hw && op->src[0]->type != GGML_TYPE_F16 && op->src[0]->type != GGML_TYPE_MXFP4)))
++           false) && (ne11 >= 2 && (ne11 <= ne11_mm_min || (!profile->has_matrix_hw && op->src[0]->type != GGML_TYPE_F16 && op->src[0]->type != GGML_TYPE_MXFP4 && (ne11 < tiled_min_batch || tiled_type_suffix(op->src[0]->type) == nullptr))))
+          ) ||
+          (
+           (
+            op->src[0]->type == GGML_TYPE_Q4_K ||
+            op->src[0]->type == GGML_TYPE_Q5_K ||
+            op->src[0]->type == GGML_TYPE_Q6_K ||
+-           false) && (ne11 >= 4 && (ne11 <= 8 || !profile->has_matrix_hw))
++           false) && (ne11 >= 4 && (ne11 <= 8 || (!profile->has_matrix_hw && ne11 < tiled_min_batch)))
+          )
+         )
+        ) {
+-- 
+2.37.1 (Apple Git-137.1)
+

@@ -1,0 +1,94 @@
+From febfdc6470364f390588be0268ea754619f2ff4d Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 14:04:00 +0200
+Subject: [PATCH 8/8] metal: rewrite the q6_K vector kernel for 64-wide GCN
+ (optional)
+
+Performance only. y is loaded as four float4 and the quants as ushort pairs
+(q6_K blocks are 210 bytes and only 2-byte aligned); the -32 offset is
+applied once via the sum of y. N_R0_Q6_K goes from 4 to 8.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/ggml-metal-impl.h         |  2 +-
+ .../matmul/kernel-scalar-kquant.metal         | 50 +++++++++++--------
+ 2 files changed, 30 insertions(+), 22 deletions(-)
+
+diff --git a/ggml/src/ggml-metal/ggml-metal-impl.h b/ggml/src/ggml-metal/ggml-metal-impl.h
+index 0803501..622b4c5 100644
+--- a/ggml/src/ggml-metal/ggml-metal-impl.h
++++ b/ggml/src/ggml-metal/ggml-metal-impl.h
+@@ -38,7 +38,7 @@
+ #define N_R0_Q5_K 2
+ #define N_SG_Q5_K 2
+ 
+-#define N_R0_Q6_K 4
++#define N_R0_Q6_K 8
+ #define N_SG_Q6_K 2
+ 
+ #define N_R0_IQ1_S 4
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+index 1a747a6..4ac307e 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+@@ -791,28 +791,36 @@ void kernel_mul_mv_q6_K_f32_impl(
+             device const int8_t  * sc = x[i].scales + is;
+             device const half    * dh = &x[i].d;
+ 
++            // y as four float4, quants as ushort pairs (the 210-byte block is only 2-byte aligned);
++            // the -32 offset is applied via the sum of y outside the row loop; rows are bounded by nrv
+             device const float * y = yy + i * QK_K + y_offset;
+-
+-            for (short l = 0; l < 4; ++l) {
+-                yl[4*l + 0] = y[l +  0];
+-                yl[4*l + 1] = y[l + 32];
+-                yl[4*l + 2] = y[l + 64];
+-                yl[4*l + 3] = y[l + 96];
+-            }
+-
+-            for (short row = 0; row < nr0; ++row) {
+-                float4 sums = {0.f, 0.f, 0.f, 0.f};
+-
+-                FOR_UNROLL (short l = 0; l < 4; ++l) {
+-                    sums[0] += yl[4*l + 0] * ((int8_t)((q1[l] & 0xF) | ((qh[l] & kmask1) << 4)) - 32);
+-                    sums[1] += yl[4*l + 1] * ((int8_t)((q2[l] & 0xF) | ((qh[l] & kmask2) << 2)) - 32);
+-                    sums[2] += yl[4*l + 2] * ((int8_t)((q1[l]  >> 4) | ((qh[l] & kmask3) << 0)) - 32);
+-                    sums[3] += yl[4*l + 3] * ((int8_t)((q2[l]  >> 4) | ((qh[l] & kmask4) >> 2)) - 32);
+-                }
+-
+-                // Accumulate across chunks — each chunk covers different tid
+-                // positions within the superblock, so partial sums are additive.
+-                sumf[row] += dh[0] * (sums[0] * sc[0] + sums[1] * sc[2] + sums[2] * sc[4] + sums[3] * sc[6]);
++            const float4 y0 = *(device const float4 *)(y +  0);
++            const float4 y1 = *(device const float4 *)(y + 32);
++            const float4 y2 = *(device const float4 *)(y + 64);
++            const float4 y3 = *(device const float4 *)(y + 96);
++            const float4 ys = 32.f * float4(y0.x + y0.y + y0.z + y0.w, y1.x + y1.y + y1.z + y1.w,
++                                            y2.x + y2.y + y2.z + y2.w, y3.x + y3.y + y3.z + y3.w);
++            const short nrv = min((int)nr0, (int)args.ne01 - first_row);
++
++            for (short row = 0; row < nrv; ++row) {
++                device const ushort * p1 = (device const ushort *) q1;
++                device const ushort * p2 = (device const ushort *) q2;
++                device const ushort * ph = (device const ushort *) qh;
++                const uint qa = uint(p1[0]) | (uint(p1[1]) << 16);
++                const uint qb = uint(p2[0]) | (uint(p2[1]) << 16);
++                const uint qc = uint(ph[0]) | (uint(ph[1]) << 16);
++
++                const uint v0 = ( qa       & 0x0F0F0F0Fu) | ((qc & 0x03030303u) << 4);
++                const uint v1 = ( qb       & 0x0F0F0F0Fu) | ((qc & 0x0C0C0C0Cu) << 2);
++                const uint v2 = ((qa >> 4) & 0x0F0F0F0Fu) |  (qc & 0x30303030u);
++                const uint v3 = ((qb >> 4) & 0x0F0F0F0Fu) | ((qc & 0xC0C0C0C0u) >> 2);
++
++                const float s0 = dot(y0, float4(as_type<uchar4>(v0))) - ys.x;
++                const float s1 = dot(y1, float4(as_type<uchar4>(v1))) - ys.y;
++                const float s2 = dot(y2, float4(as_type<uchar4>(v2))) - ys.z;
++                const float s3 = dot(y3, float4(as_type<uchar4>(v3))) - ys.w;
++
++                sumf[row] = fma(float(dh[0]), fma(s0, float(sc[0]), fma(s1, float(sc[2]), fma(s2, float(sc[4]), s3 * float(sc[6])))), sumf[row]);
+ 
+                 q1 += args.nb01;
+                 q2 += args.nb01;
+-- 
+2.37.1 (Apple Git-137.1)
+

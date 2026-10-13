@@ -1,0 +1,14 @@
+Mainline ggml-org/llama.cpp 7cf1c54 (tree 860d4eb), Metal build, macOS 12.7.6, FirePro D700.
+Command: llama-bench -m qwen2.5-coder-7b-instruct-q4_k_m.gguf -ngl 99 -fa 0 -t 8 -p 512 -n 128 -r 3
+Result: abort (exit 134). Relevant stderr lines:
+<src>/ggml/src/ggml-metal/ggml-metal-device.m:2327: GGML_ASSERT(buf_src) failed
+0   libggml-base.0.24.0.dylib           0x000000010503999a ggml_print_backtrace + 266
+1   libggml-base.0.24.0.dylib           0x0000000105039bf4 ggml_abort + 260
+2   libggml-metal.0.24.0.dylib          0x0000000105bfd3ad ggml_metal_buffer_set_tensor + 525
+3   libggml-base.0.24.0.dylib           0x000000010505eff6 ggml_backend_sched_graph_compute_async + 1462
+4   libllama.0.4.1.dylib                0x000000010599d8e1 _ZN13llama_context13graph_computeEP11ggml_cgraphb + 145
+5   libllama.0.4.1.dylib                0x000000010599d1db _ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status + 347
+6   libllama.0.4.1.dylib                0x000000010599f3f2 _ZN13llama_context6decodeERK11llama_batch + 3074
+7   libllama.0.4.1.dylib                0x00000001059a549f llama_decode + 15
+8   libllama-bench-impl.dylib           0x0000000104cf7b39 _ZL11test_promptP13llama_contextiii + 377
+9   libllama-bench-impl.dylib           0x0000000104cebaa4 _Z11llama_benchiPPc + 7588

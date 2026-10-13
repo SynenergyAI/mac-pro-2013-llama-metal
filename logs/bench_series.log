@@ -1,0 +1,26 @@
+[2026-10-10 14:08:42] model: qwen2.5-coder-7b-instruct-q4_k_m.gguf, 4683073536 bytes · device: MTL0:AMD Radeon HD - FirePro D700 (one card) · llama-bench -ngl 99 -fa 0 -t 4 -r 3 · json samples_ts = all three repetitions
+[2026-10-10 14:09:09] patch 1 · pp256 · exit 134 · no result · GGML_ASSERT(buf_dst) failed
+[2026-10-10 14:09:40] patch 1 · pp512 · exit 134 · no result · GGML_ASSERT(buf_dst) failed
+[2026-10-10 14:10:33] patch 1 · tg128 · exit 134 · no result · GGML_ASSERT(buf_dst) failed
+[2026-10-10 14:12:19] patch 2 · pp256 · exit 0 · median 9.95 tok/s, samples 9.95, 9.95, 9.95
+[2026-10-10 14:12:52] patch 2 · pp512 · exit 134 · no result · ggml-metal-context.m:319: fatal error
+[2026-10-10 14:13:01] patch 2 · tg128 · exit 0 · median 67.03 tok/s, samples 66.77, 67.03, 67.11
+[2026-10-10 14:15:12] patch 3 · pp256 · exit 0 · median 9.95 tok/s, samples 9.96, 9.95, 9.92
+[2026-10-10 14:15:45] patch 3 · pp512 · exit 134 · no result · ggml-metal-context.m:319: fatal error
+[2026-10-10 14:16:40] patch 3 · tg128 · exit 0 · median 7.45 tok/s, samples 7.49, 7.41, 7.45
+[2026-10-10 14:17:04] patch 4 · pp256 · exit 0 · median 49.14 tok/s, samples 49.17, 49.14, 48.66
+[2026-10-10 14:17:46] patch 4 · pp512 · exit 0 · median 52.58 tok/s, samples 52.53, 52.58, 52.58
+[2026-10-10 14:18:41] patch 4 · tg128 · exit 0 · median 7.42 tok/s, samples 7.46, 7.42, 7.39
+[2026-10-10 14:19:29] patch 5 · pp256 · exit 0 · median 48.84 tok/s, samples 48.84, 48.07, 48.87
+[2026-10-10 14:20:11] patch 5 · pp512 · exit 0 · median 52.61 tok/s, samples 52.08, 52.61, 52.63
+[2026-10-10 14:21:05] patch 5 · tg128 · exit 0 · median 7.42 tok/s, samples 7.42, 7.44, 7.42
+[2026-10-10 14:21:53] patch 6 · pp256 · exit 0 · median 48.97 tok/s, samples 48.97, 48.97, 48.94
+[2026-10-10 14:22:35] patch 6 · pp512 · exit 0 · median 52.08 tok/s, samples 52.67, 52.08, 52.07
+[2026-10-10 14:23:13] patch 6 · tg128 · exit 0 · median 11.20 tok/s, samples 11.21, 11.20, 11.19
+[2026-10-10 14:24:01] patch 7 · pp256 · exit 0 · median 48.63 tok/s, samples 48.63, 48.40, 48.95
+[2026-10-10 14:24:43] patch 7 · pp512 · exit 0 · median 52.45 tok/s, samples 52.65, 52.08, 52.45
+[2026-10-10 14:25:17] patch 7 · tg128 · exit 0 · median 12.21 tok/s, samples 12.21, 12.21, 12.21
+[2026-10-10 14:26:06] patch 8 · pp256 · exit 0 · median 49.23 tok/s, samples 49.11, 49.26, 49.23
+[2026-10-10 14:26:48] patch 8 · pp512 · exit 0 · median 52.58 tok/s, samples 52.66, 52.58, 52.08
+[2026-10-10 14:27:20] patch 8 · tg128 · exit 0 · median 12.89 tok/s, samples 12.92, 12.89, 12.89
+[2026-10-10 14:27:20] bench done

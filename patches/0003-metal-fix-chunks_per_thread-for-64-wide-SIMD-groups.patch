@@ -1,0 +1,126 @@
+From 1156417db0e2a4925aecdd12d1ef7d74aa91d414 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:41:57 +0200
+Subject: [PATCH 3/8] metal: fix chunks_per_thread for 64-wide SIMD groups
+
+Several vector matmul kernels compute chunks_per_thread = 32 / NW (or NB / NW).
+With NW = 64 this is 0, so those kernels do no work and the result is wrong.
+For NW > 32, lanes 0..31 now take one chunk and the other lanes none, which
+matches the 32-lane layout these kernels assume.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/matmul/kernel-scalar-basic.metal |  4 ++--
+ .../src/ggml-metal/matmul/kernel-scalar-kquant.metal | 12 ++++++------
+ ggml/src/ggml-metal/matmul/kernel-scalar.metal       |  8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar-basic.metal b/ggml/src/ggml-metal/matmul/kernel-scalar-basic.metal
+index 4095adf..4911e53 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar-basic.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar-basic.metal
+@@ -236,7 +236,7 @@ void mul_vec_q_n_f32_impl(
+     // At NW=16, only flat_pos 0..15 are covered — il=8 half is missed.
+     // Fix: chunks_per_thread = 32/NW outer loop covers all positions.
+     // At NW=32 this is 1 iteration (no-op).
+-    const short chunks_per_thread = 32 / NW;  // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     float yl[16]; // src1 vector cache
+ 
+@@ -392,7 +392,7 @@ void kernel_mul_mv_q8_0_f32_impl(
+     // 32-thread space = NQ=8 block positions x 4 element offsets.
+     // At NW=16, il only covers 0..1, missing offsets 2..3.
+     // Fix: flatten to virtual 32-thread index, iterate chunks_per_thread times.
+-    const short chunks_per_thread = 32 / NW;  // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     float yl[NQ];
+ 
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+index 54638bd..85de6ba 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar-kquant.metal
+@@ -171,7 +171,7 @@ void kernel_mul_mv_q3_K_f32_impl(
+     // so each thread must iterate over chunks_per_thread = 32/NW tid positions.
+     const short ix             = eff_tiisg % 4;
+     const short tid_base       = eff_tiisg / 4;
+-    const short chunks_per_thread = 32 / NW;  // 1 at NW=32, 4 at NW=8
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     // One would think that the Metal compiler would figure out that ip and il can only have
+     // 4 possible states, and optimize accordingly. Well, no. It needs help, and we do it
+@@ -357,7 +357,7 @@ void kernel_mul_mv_q4_K_f32_impl(
+     // covers vtiisg NW..2*NW-1 (ix=1). Both chunks accumulate into sumf[].
+     // At NW=32 this is a single iteration (no-op change).
+     const short tiisg_base        = eff_tiisg;
+-    const short chunks_per_thread = 32 / NW;  // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     const int nb = args.ne00/QK_K;
+ 
+@@ -546,7 +546,7 @@ void kernel_mul_mv_q5_K_f32_impl(
+     // chunks_per_thread = 32/NW ensures all 8 tid positions are covered.
+     const short ix             = eff_tiisg % 4;   // superblock stride index (fixed per thread)
+     const short tid_base       = eff_tiisg / 4;   // base tid position
+-    const short chunks_per_thread = 32 / NW;      // 1 at NW=32, 2 at NW=16, 4 at NW=8
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     uint16_t sc16[4];
+     thread const uint8_t * sc8 = (thread const uint8_t *)sc16;
+@@ -718,7 +718,7 @@ void kernel_mul_mv_q6_K_f32_impl(
+     // chunks_per_thread = 32/NW ensures all 16 tid positions are covered.
+     const short ix             = eff_tiisg % 2;   // superblock stride index (fixed per thread)
+     const short tid_base       = eff_tiisg / 2;   // base tid position
+-    const short chunks_per_thread = 32 / NW;      // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     for (short c = 0; c < chunks_per_thread; ++c) {
+         // Virtual tid: steps by NW/2 each chunk to cover all 16 tid positions.
+@@ -1827,7 +1827,7 @@ void kernel_mul_mv_iq4_nl_f32_impl(
+     // Fix: keep it fixed, vary ix per chunk. chunks_per_thread = 32/NW.
+     const short it             = eff_tiisg % 2;   // 0 or 1 — fixed per thread
+     const short ix_base        = eff_tiisg / 2;   // base superblock position
+-    const short chunks_per_thread = 32 / NW;      // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     shmem_f32[eff_tiisg] = kvalues_iq4nl_f[eff_tiisg%16];
+     threadgroup_barrier(mem_flags::mem_threadgroup);
+@@ -1969,7 +1969,7 @@ void kernel_mul_mv_iq4_xs_f32_impl(
+     // Fix: keep ix fixed via eff_tiisg%2, vary it per chunk. chunks_per_thread = 32/NW.
+     const short ix             = eff_tiisg % 2;    // superblock stride (fixed per thread)
+     const short it_base        = eff_tiisg / 2;    // base tile position
+-    const short chunks_per_thread = 32 / NW;       // 1 at NW=32, 2 at NW=16
++    const short chunks_per_thread = (NW > 32) ? (eff_tiisg < 32 ? 1 : 0) : 32 / NW; // NW > 32: only lanes 0..31 do work (layout assumes 32 lanes)
+ 
+     shmem_f32[eff_tiisg] = kvalues_iq4nl_f[eff_tiisg%16];
+     threadgroup_barrier(mem_flags::mem_threadgroup);
+diff --git a/ggml/src/ggml-metal/matmul/kernel-scalar.metal b/ggml/src/ggml-metal/matmul/kernel-scalar.metal
+index e3c731a..10a25ed 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-scalar.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-scalar.metal
+@@ -433,8 +433,8 @@ void kernel_mul_mv_t_t_impl(
+     // At NW=32: 1 chunk (il has 4 values, 4 threads per block)
+     // At NW=16: 2 chunks (il has 2 values, 2 threads per block)
+     // At NW=8:  4 chunks (il has 1 value, 1 thread per block)
+-    const short chunks_per_thread = NB / NW;  // = 32/NW
+-    const short threads_per_blk   = NW / NF;  // threads sharing one block
++    const short chunks_per_thread = (NW > NB) ? (eff_tiisg < NB ? 1 : 0) : NB / NW; // NW > NB: only lanes 0..NB-1 do work
++    const short threads_per_blk   = (NW > NB ? NB : NW) / NF; // threads sharing one block, at most NB logical lanes
+     const short ix = eff_tiisg / threads_per_blk;
+ 
+     const int ib0 = eff_sgitg*NF + ix;
+@@ -572,8 +572,8 @@ void kernel_mul_mv_t_t_4_impl(
+ 
+     float sumf[NR0] = { 0.f };
+ 
+-    const short chunks_per_thread = NB / NW;
+-    const short threads_per_blk   = NW / NF;
++    const short chunks_per_thread = (NW > NB) ? (eff_tiisg < NB ? 1 : 0) : NB / NW; // NW > NB: only lanes 0..NB-1 do work
++    const short threads_per_blk   = (NW > NB ? NB : NW) / NF; // threads sharing one block, at most NB logical lanes
+     const short ix = eff_tiisg / threads_per_blk;
+ 
+     const int ib0 = eff_sgitg*NF + ix;
+-- 
+2.37.1 (Apple Git-137.1)
+

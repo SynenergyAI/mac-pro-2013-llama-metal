@@ -1,0 +1,9 @@
+test-backend-ops on MTL0 (FirePro D700), build of patch 0001 only (fork 72ba023 + #include <string>).
+Format: failed/total per type_a. Source logs: correctness-patch1-MUL_MAT.log, correctness-patch1-MUL_MAT_ID.log
+
+MUL_MAT: 433/869 tests passed
+  f16 192/262, f32 143/198, q4_1 16/43, q4_K 16/41, q8_0 16/43, q4_0 14/43, iq4_xs 11/11, q3_K 11/11, q5_K 4/11, q6_K 4/11, iq4_nl 3/12, q5_0 3/12, q5_1 3/12, iq1_m 0/11, iq1_s 0/11, iq2_s 0/11, iq2_xs 0/11, iq2_xxs 0/41, iq3_s 0/11, iq3_xxs 0/11, mxfp4 0/41, q2_K 0/11
+
+MUL_MAT_ID: 162/616 tests passed
+  f16 76/79, q4_1 74/74, q8_0 74/74, f32 72/72, q4_0 72/72, q4_K 72/72, iq4_nl 2/2, iq4_xs 2/2, q3_K 2/2, q5_0 2/2, q5_1 2/2, q5_K 2/2, q6_K 2/2, iq1_m 0/2, iq1_s 0/2, iq2_s 0/2, iq2_xs 0/2, iq2_xxs 0/72, iq3_s 0/2, iq3_xxs 0/2, mxfp4 0/73, q2_K 0/2
+

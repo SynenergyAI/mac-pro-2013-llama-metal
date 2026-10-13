@@ -1,0 +1,1551 @@
+ggml_metal_device_init: tensor API disabled for pre-M5 and pre-A19 devices
+ggml_metal_library_init: using embedded metal library
+ggml_metal_library_init: loaded in 24.358 sec
+ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_concat', name = 'kernel_concat'
+ggml_metal_library_compile_pipeline: kernel_concat                            simd mismatch: expected 32, got 64 — recompiling
+ggml_metal_library_compile_pipeline: loaded kernel_concat                              0x7fe8fa305b10 | th_max = 1024 | th_width =   64
+ggml_metal_device_init: probed simd_width = 64
+ggml_metal_rsets_init: creating a residency set collection (keep_alive = 180 s)
+ggml_metal_device_init: GPU name:   MTL0:AMD Radeon HD - FirePro D700
+ggml_metal_device_init: GPU family: MTLGPUFamilyCommon3 (3003)
+ggml_metal_device_init: simdgroup reduction   = true
+ggml_metal_device_init: simdgroup matrix mul. = false
+ggml_metal_device_init: has unified memory    = false
+ggml_metal_device_init: has bfloat            = false
+ggml_metal_device_init: has tensor            = false
+ggml_metal_device_init: use residency sets    = true
+ggml_metal_device_init: use shared buffers    = false
+ggml_metal_device_init: profile: vendor=2 name=AMD Radeon HD - FirePro D700 shared=false matrix_hw=false simd_w=64 max_tg=1024 smem=32768
+ggml_metal_device_init: recommendedMaxWorkingSetSize  =  6442.45 MB
+ggml_metal_init: allocating
+ggml_metal_init: found device: AMD Radeon HD - FirePro D700
+ggml_metal_init: found device: AMD Radeon HD - FirePro D700
+ggml_metal_init: picking default device: AMD Radeon HD - FirePro D700
+ggml_metal_init: disabling concurrent dispatch (not supported on non-UMA devices)
+ggml_metal_init: use fusion         = true
+ggml_metal_init: use concurrency    = false
+ggml_metal_init: use graph optimize = true
+ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32_4', name = 'kernel_mul_mv_f32_f32_4_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_4_nsg=2_sr=0_st=0    0x7fe8fa306d00 | th_max =  768 | th_width =   64
+Testing 3 devices
+
+Backend 1/3: MTL0:AMD Radeon HD - FirePro D700
+  Device description: Common3 shared=false matrix_hw=false simd_w=64
+  Device memory: 6144 MB (6143 MB free)
+
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f32_f32_r1_2', name = 'kernel_mul_mv_ext_f32_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f32_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8f97073c0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f32_f32_r1_3', name = 'kernel_mul_mv_ext_f32_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f32_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa0092a0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f32_f32_r1_4', name = 'kernel_mul_mv_ext_f32_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f32_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa30a500 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f32_f32_r1_5', name = 'kernel_mul_mv_ext_f32_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f32_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f9709c70 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32_4', name = 'kernel_mul_mv_f16_f32_4_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_4_nsg=2_sr=0_st=0    0x7fe8fa2082d0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f16_f32_r1_2', name = 'kernel_mul_mv_ext_f16_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f16_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa00d380 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f16_f32_r1_3', name = 'kernel_mul_mv_ext_f16_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f16_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f970f780 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f16_f32_r1_4', name = 'kernel_mul_mv_ext_f16_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f16_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa3129d0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f16_f32_r1_5', name = 'kernel_mul_mv_ext_f16_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f16_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa313ae0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q4_0_f32', name = 'kernel_mul_mv_q4_0_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q4_0_f32_nsg=2_sr=0_st=0     0x7fe8fa317ee0 | th_max =  512 | th_width =   64
+not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_0_f32_r1_2', name = 'kernel_mul_mv_ext_q4_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa318e70 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_0_f32_r1_3', name = 'kernel_mul_mv_ext_q4_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa012bb0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_0_f32_r1_4', name = 'kernel_mul_mv_ext_q4_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f9717850 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_0_f32_r1_5', name = 'kernel_mul_mv_ext_q4_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f9718960 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q4_1_f32', name = 'kernel_mul_mv_q4_1_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q4_1_f32_nsg=2_sr=0_st=0     0x7fe8fa31fa90 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_1_f32_r1_2', name = 'kernel_mul_mv_ext_q4_1_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_1_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8c970ba00 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_1_f32_r1_3', name = 'kernel_mul_mv_ext_q4_1_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_1_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f971d700 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_1_f32_r1_4', name = 'kernel_mul_mv_ext_q4_1_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_1_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa0177d0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_1_f32_r1_5', name = 'kernel_mul_mv_ext_q4_1_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_1_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f971f260 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q5_0_f32', name = 'kernel_mul_mv_q5_0_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q5_0_f32_nsg=2_sr=0_st=0     0x7fe8f9722710 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_0_f32_r1_2', name = 'kernel_mul_mv_ext_q5_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa327050 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_0_f32_r1_3', name = 'kernel_mul_mv_ext_q5_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa328820 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_0_f32_r1_4', name = 'kernel_mul_mv_ext_q5_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f9724240 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_0_f32_r1_5', name = 'kernel_mul_mv_ext_q5_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa32a8c0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q5_1_f32', name = 'kernel_mul_mv_q5_1_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q5_1_f32_nsg=2_sr=0_st=0     0x7fe8f9728df0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_1_f32_r1_2', name = 'kernel_mul_mv_ext_q5_1_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_1_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa32e9e0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_1_f32_r1_3', name = 'kernel_mul_mv_ext_q5_1_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_1_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f972ab20 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_1_f32_r1_4', name = 'kernel_mul_mv_ext_q5_1_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_1_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f972bc60 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_1_f32_r1_5', name = 'kernel_mul_mv_ext_q5_1_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_1_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa3312b0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q8_0_f32', name = 'kernel_mul_mv_q8_0_f32_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q8_0_f32_nsg=4_sr=0_st=0     0x7fe8f972f8b0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q8_0_f32_r1_2', name = 'kernel_mul_mv_ext_q8_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q8_0_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa024f80 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q8_0_f32_r1_3', name = 'kernel_mul_mv_ext_q8_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q8_0_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f97310b0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q8_0_f32_r1_4', name = 'kernel_mul_mv_ext_q8_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q8_0_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa337990 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q8_0_f32_r1_5', name = 'kernel_mul_mv_ext_q8_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q8_0_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa338ad0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_mxfp4_f32', name = 'kernel_mul_mv_mxfp4_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_mxfp4_f32_nsg=2_sr=0_st=0    0x7fe8fa33d000 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_mxfp4_f32_r1_2', name = 'kernel_mul_mv_ext_mxfp4_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_mxfp4_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8f97368f0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_mxfp4_f32_r1_3', name = 'kernel_mul_mv_ext_mxfp4_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_mxfp4_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f9737bb0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_mxfp4_f32_r1_4', name = 'kernel_mul_mv_ext_mxfp4_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_mxfp4_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa33f8e0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_mxfp4_f32_r1_5', name = 'kernel_mul_mv_ext_mxfp4_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_mxfp4_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa340c20 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q2_K_f32', name = 'kernel_mul_mv_q2_K_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q2_K_f32_nsg=2_sr=0_st=0     0x7fe8c9713a50 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q3_K_f32', name = 'kernel_mul_mv_q3_K_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q3_K_f32_nsg=2_sr=0_st=0     0x7fe8fa031540 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q4_K_f32', name = 'kernel_mul_mv_q4_K_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q4_K_f32_nsg=2_sr=0_st=0     0x7fe8fa035880 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_K_f32_r1_4', name = 'kernel_mul_mv_ext_q4_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa3543c0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_K_f32_r1_5', name = 'kernel_mul_mv_ext_q4_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa355bc0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q4_K_f32_r1_3', name = 'kernel_mul_mv_ext_q4_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q4_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8c9719b40 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q5_K_f32', name = 'kernel_mul_mv_q5_K_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q5_K_f32_nsg=2_sr=0_st=0     0x7fe8fa359880 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_K_f32_r1_4', name = 'kernel_mul_mv_ext_q5_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa03b500 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_K_f32_r1_5', name = 'kernel_mul_mv_ext_q5_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa03bc50 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q5_K_f32_r1_3', name = 'kernel_mul_mv_ext_q5_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q5_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa35e920 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_q6_K_f32', name = 'kernel_mul_mv_q6_K_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_q6_K_f32_nsg=2_sr=0_st=0     0x7fe8f97531d0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q6_K_f32_r1_4', name = 'kernel_mul_mv_ext_q6_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q6_K_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa03f040 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q6_K_f32_r1_5', name = 'kernel_mul_mv_ext_q6_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q6_K_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa364620 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_q6_K_f32_r1_3', name = 'kernel_mul_mv_ext_q6_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_q6_K_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa365250 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq2_xxs_f32', name = 'kernel_mul_mv_iq2_xxs_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq2_xxs_f32_nsg=2_sr=0_st=0   0x7fe8fa042490 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq2_xs_f32', name = 'kernel_mul_mv_iq2_xs_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq2_xs_f32_nsg=2_sr=0_st=0   0x7fe8fa36cf70 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq2_s_f32', name = 'kernel_mul_mv_iq2_s_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq2_s_f32_nsg=2_sr=0_st=0    0x7fe8f9762db0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq3_xxs_f32', name = 'kernel_mul_mv_iq3_xxs_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq3_xxs_f32_nsg=2_sr=0_st=0   0x7fe8fa051210 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq1_s_f32', name = 'kernel_mul_mv_iq1_s_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq1_s_f32_nsg=2_sr=0_st=0    0x7fe8fa37d630 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq1_m_f32', name = 'kernel_mul_mv_iq1_m_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq1_m_f32_nsg=2_sr=0_st=0    0x7fe8fa383e30 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq4_nl_f32', name = 'kernel_mul_mv_iq4_nl_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq4_nl_f32_nsg=2_sr=0_st=0   0x7fe8fa05e6d0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_iq4_nl_f32_r1_2', name = 'kernel_mul_mv_ext_iq4_nl_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_iq4_nl_f32_r1_2_nsg=2_nxpsg=16_sr=0_st=0   0x7fe8fa38cd10 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_iq4_nl_f32_r1_3', name = 'kernel_mul_mv_ext_iq4_nl_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_iq4_nl_f32_r1_3_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa060230 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_iq4_nl_f32_r1_4', name = 'kernel_mul_mv_ext_iq4_nl_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_iq4_nl_f32_r1_4_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8f977ccf0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_iq4_nl_f32_r1_5', name = 'kernel_mul_mv_ext_iq4_nl_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_iq4_nl_f32_r1_5_nsg=2_nxpsg=8_sr=0_st=0   0x7fe8fa38ec60 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq3_s_f32', name = 'kernel_mul_mv_iq3_s_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq3_s_f32_nsg=2_sr=0_st=0    0x7fe8f97817b0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_iq4_xs_f32', name = 'kernel_mul_mv_iq4_xs_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_iq4_xs_f32_nsg=2_sr=0_st=0   0x7fe8fa399ad0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=2,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=3,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=4,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=5,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=6,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=7,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=8,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_f16', name = 'kernel_mul_mat_tiled_f16'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_f16                   0x7fe8fa3a0a80 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_q4_0', name = 'kernel_mul_mat_tiled_q4_0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_q4_0                  0x7fe8fa0748e0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_q8_0', name = 'kernel_mul_mat_tiled_q8_0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_q8_0                  0x7fe8fa3b21b0 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_q4_K', name = 'kernel_mul_mat_tiled_q4_K'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_q4_K                  0x7fe8c9736c70 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_q5_K', name = 'kernel_mul_mat_tiled_q5_K'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_q5_K                  0x7fe8fa3c3060 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_q6_K', name = 'kernel_mul_mat_tiled_q6_K'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_q6_K                  0x7fe8f97b6720 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=16,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=16,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=32,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=32,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=32,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=64,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=64,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=100,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=100,k=512,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=128,n=100,k=3584,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32_short', name = 'kernel_mul_mv_f32_f32_short_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_short_nsg=1_sr=0_st=0   0x7fe8f97cf190 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32_4', name = 'kernel_mul_mv_f32_f32_4_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_4_nsg=4_sr=0_st=0    0x7fe8fa2360a0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32_short', name = 'kernel_mul_mv_f16_f32_short_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_short_nsg=1_sr=0_st=0   0x7fe8fa0bd9a0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32_4', name = 'kernel_mul_mv_f16_f32_4_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_4_nsg=4_sr=0_st=0    0x7fe89f9163e0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f16_4', name = 'kernel_mul_mv_f16_f16_4_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f16_4_nsg=2_sr=0_st=0    0x7fe8fa0caef0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f16_short', name = 'kernel_mul_mv_f16_f16_short_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f16_short_nsg=1_sr=0_st=0   0x7fe8fa0d83c0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=4,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f16_4', name = 'kernel_mul_mv_f16_f16_4_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f16_4_nsg=4_sr=0_st=0    0x7fe89f9471e0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q8_0,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_K,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=mxfp4,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[1,1],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,1],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[1,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[3,2],nr=[2,2],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=8,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,1,3,2],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=256,bs=[2,3],nr=[1,1],per=[0,3,2,1],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=1,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=8,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=16,k=1024,bs=[3,2],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=iq2_xxs,type_b=f16,m=16,n=8,k=256,bs=[1536,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=1,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=1,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=1,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=1,k=1,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=16,n=1,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_ext_f16_f32_r1_2', name = 'kernel_mul_mv_ext_f16_f32_r1_2_nsg=2_nxpsg=8_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_ext_f16_f32_r1_2_nsg=2_nxpsg=8_sr=0_st=0   0x7fe89f8c9a50 | th_max =  768 | th_width =   64
+not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f16,type_b=f32,m=64,n=2,k=128,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=83,n=2,k=128,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32_4', name = 'kernel_mul_mv_f16_f32_4_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_4_nsg=1_sr=0_st=0    0x7fe89f9e87d0 | th_max =  768 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=64,n=2,k=64,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=83,n=2,k=64,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=64,n=45,k=128,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=45,k=64,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32', name = 'kernel_mul_mv_f16_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_nsg=2_sr=0_st=0      0x7fe89e04e010 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=193,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32', name = 'kernel_mul_mv_f16_f32_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_nsg=1_sr=0_st=0      0x7fe89e04e760 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=67,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32_4', name = 'kernel_mul_mv_f32_f32_4_nsg=1_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_4_nsg=1_sr=0_st=0    0x7fe89f8d0800 | th_max =  768 | th_width =   64
+ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_bin_fuse_f32_f32_f32_4', name = 'kernel_bin_fuse_f32_f32_f32_4_op=0_nf=1_rb=0'
+ggml_metal_library_compile_pipeline: loaded kernel_bin_fuse_f32_f32_f32_4_op=0_nf=1_rb=0   0x7fe89f8d0df0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=16,n=32,k=32,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=64,o=3): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mat_tiled_f32', name = 'kernel_mul_mat_tiled_f32'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mat_tiled_f32                   0x7fe89f8d1a80 | th_max =  512 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=64,n=77,k=77,bs=[12,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=576,n=512,k=576,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_0,type_b=f32,m=1,n=2048,k=8192,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=q4_0,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_1,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_0,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_1,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q8_0,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=mxfp4,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q2_K,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q3_K,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q4_K,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q5_K,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=q6_K,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xxs,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_xs,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq2_s,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_xxs,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_s,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq1_m,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_nl,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq3_s,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=iq4_xs,type_b=f32,m=1,n=64,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f16_f32', name = 'kernel_mul_mv_f16_f32_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f16_f32_nsg=4_sr=0_st=0      0x7fe8d970ba50 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32', name = 'kernel_mul_mv_f32_f32_nsg=2_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_nsg=2_sr=0_st=0      0x7fe89e2089e0 | th_max = 1024 | th_width =   64
+not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): ggml_metal_library_compile_pipeline: compiling pipeline: base = 'kernel_mul_mv_f32_f32', name = 'kernel_mul_mv_f32_f32_nsg=4_sr=0_st=0'
+ggml_metal_library_compile_pipeline: loaded kernel_mul_mv_f32_f32_nsg=4_sr=0_st=0      0x7fe89f8e7cf0 | th_max = 1024 | th_width =   64
+OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[1,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[1,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[2,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[2,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[4,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[4,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[8,1],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[8,1],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[1,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[1,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[2,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[2,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[4,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[4,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[1,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[1,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1056,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=128,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=128,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1056,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2112,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f16,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): OK
+  MUL_MAT(type_a=bf16,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=bf16,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): not supported [MTL0:AMD Radeon HD - FirePro D700] 
+  MUL_MAT(type_a=f32,type_b=f32,m=1057,n=1,k=129,bs=[8,3],nr=[4,1],per=[0,2,1,3],k_v=0,o=1): OK
+  MUL_MAT(type_a=f32,type_b=f32,m=129,n=1,k=1057,bs=[8,3],nr=[4,1],per=[0,1,2,3],k_v=2113,o=1): ggml_metal_free: deallocating
+ggml_metal: transfer stats:
+ggml_metal:   H2D:  2243.42 MiB in  2573.37 ms (   872 MiB/s, 7325 calls)
+ggml_metal:   D2H:  2322.95 MiB in  5018.61 ms (   463 MiB/s, 16434 calls)
+ggml_metal:   total transfer time: 7591.98 ms
+OK
+  941/941 tests passed
+  Backend MTL0:AMD Radeon HD - FirePro D700: OK
+Backend 2/3: BLAS
+  Skipping
+Backend 3/3: CPU
+  Skipping
+3/3 backends passed
+OK

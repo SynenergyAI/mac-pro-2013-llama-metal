@@ -1,0 +1,104 @@
+From 3e1e143aafaea2f2f9e61e2763a3a45fe07e5eb6 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:50:22 +0200
+Subject: [PATCH 5/8] metal: fix q6_K unpacking in the tiled loader; tests: add
+ m=128 MUL_MAT cases
+
+load_a_q6_K_to_shmem read ql/qh as 16-bit words with offsets that do not
+match the q6_K layout, so tiled q6_K matmuls returned wrong values (long
+prompts printed "@@@@"). It now unpacks byte-wise following dequantize_q6_K.
+The existing MUL_MAT cases use m = 16 and never reach the tiled kernels
+(m >= 64), so 72 cases with m = 128 are added.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../matmul/kernel-tiled-loaders-kquant.metal  | 50 +++++--------------
+ tests/test-backend-ops.cpp                    |  9 ++++
+ 2 files changed, 21 insertions(+), 38 deletions(-)
+
+diff --git a/ggml/src/ggml-metal/matmul/kernel-tiled-loaders-kquant.metal b/ggml/src/ggml-metal/matmul/kernel-tiled-loaders-kquant.metal
+index 0d6271d..bff72e4 100644
+--- a/ggml/src/ggml-metal/matmul/kernel-tiled-loaders-kquant.metal
++++ b/ggml/src/ggml-metal/matmul/kernel-tiled-loaders-kquant.metal
+@@ -236,46 +236,20 @@ inline void load_a_q6_K_to_shmem(
+         const uint local_idx0 = second_half ? (2 * (loadr - 8)) : (2 * loadr);
+         const uint local_idx1 = local_idx0 + 1;
+ 
+-        // Compute element indices within the QK_K=256 block
+-        // Each il produces 16 elements at different positions
+-        // From dequant_q6_K: complex bit extraction based on il
+-        // il/8 selects 32-element group, (il/2)&1 and il&1 select sub-positions
+-
+-        // Simplified approach: compute byte offsets directly
+-        // ql: uint16_t access, base = 32*(il/8) + 16*((il/2)&1) + 8*(il&1)
+-        // qh: uint16_t access, base = 16*(il/8) + 8*(il&1)
+-
+-        device const uint16_t * ql = (device const uint16_t *)block_ptr->ql;
+-        device const uint16_t * qh = (device const uint16_t *)block_ptr->qh;
+-
+-        ql = ql + 32 * (il / 8) + 16 * ((il / 2) & 1) + 8 * (il & 1);
+-        qh = qh + 16 * (il / 8) + 8 * (il & 1);
+-
++        // Unpack following the reference dequantize_q6_K layout. Each il yields 16 elements;
++        // element e takes byte e of the ql slice and byte e of the qh slice.
++        // ql slice: 64*(il/8) + 32*((il/2)&1) + 16*(il&1) bytes; qh slice: 32*(il/8) + 16*(il&1) bytes.
++        // Low nibble for il_mod < 2, high nibble otherwise; the two high bits are (qh >> 2*il_mod) & 3.
++        device const uint8_t * qlb = (device const uint8_t *)block_ptr->ql + 64*(il/8) + 32*((il/2)&1) + 16*(il&1);
++        device const uint8_t * qhb = (device const uint8_t *)block_ptr->qh + 32*(il/8) + 16*(il&1);
+         const uint il_mod = (il / 2) & 3;
+ 
+-        // Extract 6-bit values for elements 0 and 1
+-        // From dequant_q6_K logic:
+-        const uint16_t ql0 = ql[local_idx0 / 2];
+-        const uint16_t ql1 = ql[local_idx1 / 2];
+-        const uint16_t qh0 = qh[local_idx0 / 2];
+-        const uint16_t qh1 = qh[local_idx1 / 2];
+-
+-        // Bit extraction depends on il_mod and element position
+-        uint q_val0, q_val1;
+-
+-        if (il_mod == 0) {
+-            q_val0 = ((ql0 & 0xF) | ((qh0 & 0x03) << 4)) - 32;
+-            q_val1 = ((ql1 & 0xF) | ((qh1 & 0x03) << 4)) - 32;
+-        } else if (il_mod == 1) {
+-            q_val0 = ((ql0 >> 4) | ((qh0 & 0x0c) << 2)) - 32;
+-            q_val1 = ((ql1 >> 4) | ((qh1 & 0x0c) << 2)) - 32;
+-        } else if (il_mod == 2) {
+-            q_val0 = ((ql0 >> 8) | ((qh0 & 0x30) << 0)) - 32;
+-            q_val1 = ((ql1 >> 8) | ((qh1 & 0x30) << 0)) - 32;
+-        } else {  // il_mod == 3
+-            q_val0 = ((ql0 >> 12) | ((qh0 & 0xc0) >> 2)) - 32;
+-            q_val1 = ((ql1 >> 12) | ((qh1 & 0xc0) >> 2)) - 32;
+-        }
++        const uint8_t lb0 = qlb[local_idx0], lb1 = qlb[local_idx1];
++        const uint8_t hb0 = qhb[local_idx0], hb1 = qhb[local_idx1];
++        const int nib0 = (il_mod >= 2) ? (lb0 >> 4) : (lb0 & 0xF);
++        const int nib1 = (il_mod >= 2) ? (lb1 >> 4) : (lb1 & 0xF);
++        const int q_val0 = (nib0 | (((hb0 >> (2*il_mod)) & 3) << 4)) - 32;   // signed, -32..31
++        const int q_val1 = (nib1 | (((hb1 >> (2*il_mod)) & 3) << 4)) - 32;
+ 
+         const float val0 = d * sc * float(q_val0);
+         const float val1 = d * sc * float(q_val1);
+diff --git a/tests/test-backend-ops.cpp b/tests/test-backend-ops.cpp
+index acc4237..ae7afeb 100644
+--- a/tests/test-backend-ops.cpp
++++ b/tests/test-backend-ops.cpp
+@@ -7686,6 +7686,15 @@ static std::vector<std::unique_ptr<test_case>> make_test_cases_eval() {
+         }
+     }
+ 
++    // Shapes that reach the Metal tiled kernels (m >= 64, n >= 16); the MUL_MAT cases above use m = 16.
++    for (ggml_type type_a : {GGML_TYPE_F16, GGML_TYPE_Q4_0, GGML_TYPE_Q8_0, GGML_TYPE_Q4_K, GGML_TYPE_Q5_K, GGML_TYPE_Q6_K}) {
++        for (int n : {16, 32, 64, 100}) {
++            for (int k : {256, 512, 3584}) {
++                test_cases.emplace_back(new test_mul_mat(type_a, GGML_TYPE_F32, 128, n, k, {1, 1}, {1, 1}));
++            }
++        }
++    }
++
+ #if 0
+     {
+         // Test paths in OpenCL
+-- 
+2.37.1 (Apple Git-137.1)
+

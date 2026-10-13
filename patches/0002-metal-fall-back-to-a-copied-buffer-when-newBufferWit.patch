@@ -1,0 +1,58 @@
+From 2781168872b37a55cbeb76f9b210d1fc532f5547 Mon Sep 17 00:00:00 2001
+From: SynEnergy AI <284274979+SynenergyAI@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 13:38:00 +0200
+Subject: [PATCH 2/8] metal: fall back to a copied buffer when
+ newBufferWithBytesNoCopy returns nil
+
+ggml_metal_get_tensor_async wraps the destination with
+newBufferWithBytesNoCopy, which requires a page-aligned pointer and length.
+On a discrete AMD GPU (FirePro D700, macOS 12) it returns nil and every model
+run aborts at GGML_ASSERT(buf_dst). Use a shared buffer instead, wait for the
+command buffer and copy; transfer stats are updated as on the normal path.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ggml/src/ggml-metal/ggml-metal-context.m | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/ggml/src/ggml-metal/ggml-metal-context.m b/ggml/src/ggml-metal/ggml-metal-context.m
+index 001aac8..68d2d50 100644
+--- a/ggml/src/ggml-metal/ggml-metal-context.m
++++ b/ggml/src/ggml-metal/ggml-metal-context.m
+@@ -412,6 +412,13 @@ void ggml_metal_get_tensor_async(ggml_metal_t ctx, const struct ggml_tensor * te
+                                                          options:MTLResourceStorageModeShared
+                                                      deallocator:nil];
+ 
++        // newBufferWithBytesNoCopy requires a page-aligned pointer and length and returns nil
++        // otherwise (seen on discrete AMD GPUs). Fall back to a regular shared buffer.
++        const bool dst_needs_copy = (buf_dst == nil);
++        if (dst_needs_copy) {
++            buf_dst = [device newBufferWithLength:size options:MTLResourceStorageModeShared];
++        }
++
+         GGML_ASSERT(buf_dst);
+ 
+         struct ggml_metal_buffer_id bid_src = ggml_metal_get_buffer_id(tensor);
+@@ -435,6 +442,19 @@ void ggml_metal_get_tensor_async(ggml_metal_t ctx, const struct ggml_tensor * te
+ 
+         [encoder endEncoding];
+         [cmd_buf commit];
++
++        if (dst_needs_copy) {
++            // the fallback buffer is not the caller's memory: wait, then copy
++            [cmd_buf waitUntilCompleted];
++            memcpy(data, [buf_dst contents], size);
++            [buf_dst release];
++
++            ggml_metal_xfer_stats.d2h_bytes   += (int64_t)size;
++            ggml_metal_xfer_stats.d2h_time_us += ggml_time_us() - t0;
++            ggml_metal_xfer_stats.d2h_count   += 1;
++            return;
++        }
++
+         [buf_dst release];
+ 
+         // do not wait here for completion
+-- 
+2.37.1 (Apple Git-137.1)
+

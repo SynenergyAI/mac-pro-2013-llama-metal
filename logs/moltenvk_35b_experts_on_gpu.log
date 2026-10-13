@@ -1,0 +1,10 @@
+[2026-10-10 23:39:37] model: Qwen3.6-35B-A3B-UD-Q4_K_M.gguf (MTP), mainline 7cf1c54 Vulkan/MoltenVK, two cards -sm layer -ts 1/1, -fa 0 -t 8 -p 512 -n 128 -r 3; experts of the listed layers on GPU, all other expert tensors on CPU via -ot
+[2026-10-10 23:39:37] VRAM free with nothing loaded (GiB, per card): 5.35 5.77 
+[2026-10-10 23:40:57] expert layers on GPU: 4 [18 19 38 39] · exit 0 · min VRAM free during run (GiB, card0 card1): 2.88  · pp512: median 63.11 tok/s, samples 56.99, 63.11, 63.49 tg128: median 10.39 tok/s, samples 10.40, 10.39, 10.38 
+[2026-10-10 23:42:14] expert layers on GPU: 8 [16 17 18 19 36 37 38 39] · exit 0 · min VRAM free during run (GiB, card0 card1): 1.97 2.12 · pp512: median 65.09 tok/s, samples 59.01, 65.09, 65.39 tg128: median 10.75 tok/s, samples 10.74, 10.75, 10.81 
+[2026-10-10 23:43:30] expert layers on GPU: 10 [15 16 17 18 19 35 36 37 38 39] · exit 0 · min VRAM free during run (GiB, card0 card1): 1.52 1.67 · pp512: median 66.39 tok/s, samples 60.66, 66.39, 66.91 tg128: median 10.99 tok/s, samples 10.98, 11.00, 10.99 
+[2026-10-10 23:43:31] done
+[2026-10-11 00:02:38] model: Qwen3.6-35B-A3B-UD-Q4_K_M.gguf (MTP), mainline 7cf1c54 Vulkan/MoltenVK, two cards -sm layer -ts 1/1, -fa 0 -t 2 -p 512 -n 128 -r 3; experts of the listed layers on GPU, all other expert tensors on CPU via -ot
+[2026-10-11 00:02:38] VRAM free with nothing loaded (GiB, per card): 5.35 5.77 
+[2026-10-11 00:04:02] expert layers on GPU: 10 [15 16 17 18 19 35 36 37 38 39] · exit 0 · min VRAM free during run (GiB, card0 card1): 1.52 1.67 · pp512: median 66.14 tok/s, samples 60.40, 66.14, 66.74 tg128: median 9.01 tok/s, samples 9.00, 9.01, 9.01 
+[2026-10-11 00:04:02] done

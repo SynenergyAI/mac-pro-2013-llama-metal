@@ -1,0 +1,12 @@
+[2026-10-10 13:38:00] patch 1 (f2f1291) ggml-backend: add missing #include <string> · build exit 0 · MUL_MAT 433/869 tests passed · MUL_MAT_ID 162/616 tests passed
+[2026-10-10 13:41:57] patch 2 (2781168) metal: fall back to a copied buffer when newBufferWithBytesNoCopy returns nil · build exit 0 · MUL_MAT 433/869 tests passed · MUL_MAT_ID 162/616 tests passed
+[2026-10-10 13:46:20] patch 3 (1156417) metal: fix chunks_per_thread for 64-wide SIMD groups · build exit 0 · MUL_MAT 869/869 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 13:50:22] patch 4 (cf13136) metal: use tiled kernels for quantized matmul above a batch threshold · build exit 0 · MUL_MAT 869/869 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 13:54:51] patch 5 (3e1e143) metal: fix q6_K unpacking in the tiled loader; tests: add m=128 MUL_MAT cases · build exit 0 · MUL_MAT 941/941 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 13:59:17] patch 6 (a3f96af) metal: use all 64 lanes in the q4_K/q6_K vector kernels (optional) · build exit 0 · MUL_MAT 941/941 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 13:59:17] patches: 0001-ggml-backend-add-missing-include-string.patch 0002-metal-fall-back-to-a-copied-buffer-when-newBufferWit.patch 0003-metal-fix-chunks_per_thread-for-64-wide-SIMD-groups.patch 0004-metal-use-tiled-kernels-for-quantized-matmul-above-a.patch 0005-metal-fix-q6_K-unpacking-in-the-tiled-loader-tests-a.patch 0006-metal-use-all-64-lanes-in-the-q4_K-q6_K-vector-kerne.patch 
+[2026-10-10 13:59:17] series build done
+[2026-10-10 14:04:00] patch 7 (98e132e) metal: rewrite the q4_K vector kernel for 64-wide GCN (optional) · build exit 0 · MUL_MAT 941/941 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 14:08:28] patch 8 (febfdc6) metal: rewrite the q6_K vector kernel for 64-wide GCN (optional) · build exit 0 · MUL_MAT 941/941 tests passed · MUL_MAT_ID 616/616 tests passed
+[2026-10-10 14:08:28] patches (8): 0001-ggml-backend-add-missing-include-string.patch 0002-metal-fall-back-to-a-copied-buffer-when-newBufferWit.patch 0003-metal-fix-chunks_per_thread-for-64-wide-SIMD-groups.patch 0004-metal-use-tiled-kernels-for-quantized-matmul-above-a.patch 0005-metal-fix-q6_K-unpacking-in-the-tiled-loader-tests-a.patch 0006-metal-use-all-64-lanes-in-the-q4_K-q6_K-vector-kerne.patch 0007-metal-rewrite-the-q4_K-vector-kernel-for-64-wide-GCN.patch 0008-metal-rewrite-the-q6_K-vector-kernel-for-64-wide-GCN.patch 
+[2026-10-10 14:08:28] series build done (8 patches)

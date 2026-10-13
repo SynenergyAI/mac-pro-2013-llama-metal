@@ -1,0 +1,42 @@
+Hardware and toolchain used for all measurements in this series.
+
+== sysctl machdep.cpu.brand_string
+Intel(R) Xeon(R) CPU E5-1680 v2 @ 3.00GHz
+
+== system_profiler SPHardwareDataType (filtered)
+      Model Name: Mac Pro
+      Model Identifier: MacPro6,1
+      Processor Name: 8-Core Intel Xeon E5
+      Processor Speed: 3 GHz
+      Number of Processors: 1
+      Total Number of Cores: 8
+      Memory: 64 GB
+== system_profiler SPDisplaysDataType (filtered)
+      Chipset Model: AMD FirePro D700
+      Type: GPU
+      Bus: PCIe
+      PCIe Lane Width: x16
+      VRAM (Total): 6 GB
+      Vendor: AMD (0x1002)
+      Metal Family: Supported, Metal GPUFamily macOS 2
+      Connection Type: No Display Connected
+      Chipset Model: AMD FirePro D700
+      Type: GPU
+      Bus: PCIe
+      PCIe Lane Width: x16
+      VRAM (Total): 6 GB
+      Vendor: AMD (0x1002)
+      Metal Family: Supported, Metal GPUFamily macOS 2
+== sw_vers
+ProductName:	macOS
+ProductVersion:	12.7.6
+BuildVersion:	21H1320
+== clang --version
+Apple clang version 14.0.0 (clang-1400.0.29.202)
+Target: x86_64-apple-darwin21.6.0
+Thread model: posix
+== Metal devices (llama-bench --list-devices, GGML_METAL_DEVICES=2)
+ggml_metal_device_init: GPU name:   MTL0:AMD Radeon HD - FirePro D700
+ggml_metal_device_init: GPU name:   MTL1:AMD Radeon HD - FirePro D700
+  MTL0:AMD Radeon HD - FirePro D700: Common3 shared=false matrix_hw=false simd_w=64 (6144 MiB, 6143 MiB free)
+  MTL1:AMD Radeon HD - FirePro D700: Common3 shared=false matrix_hw=false simd_w=64 (6144 MiB, 6143 MiB free)

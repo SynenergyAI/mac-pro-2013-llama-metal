@@ -1,0 +1,7 @@
+[2026-10-10 22:58:44] model: unsloth/Qwen3.6-35B-A3B-MTP-GGUF, Qwen3.6-35B-A3B-UD-Q4_K_M.gguf, 22663387424 bytes, sha256 0b21525e972670ed59e1812e170b27c26355381f0656ecc4e25617ece7dac58b
+[2026-10-10 22:58:44] binary: mainline ggml-org/llama.cpp 7cf1c54 (tree 860d4eb), Vulkan via MoltenVK (Vulkan SDK 1.4.328.1); MUL_MAT 1017/1128, MUL_MAT_ID 817/921 on this binary, failures only in iq1/iq2/iq3 types
+[2026-10-10 22:58:44] start: llama-bench -m models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 41 -dev Vulkan0/Vulkan1 -sm layer -ts 1/1 -fa 0 -t 2 -p 512 -n 128 -r 3
+[2026-10-10 23:00:15] -t 2 · exit 0 · pp512: median 60.77 tok/s, samples 54.72, 60.77, 61.45 tg128: median 7.95 tok/s, samples 7.96, 7.95, 7.95 
+[2026-10-10 23:00:15] start: llama-bench -m models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 41 -dev Vulkan0/Vulkan1 -sm layer -ts 1/1 -fa 0 -t 8 -p 512 -n 128 -r 3
+[2026-10-10 23:01:35] -t 8 · exit 0 · pp512: median 60.94 tok/s, samples 54.77, 60.94, 61.31 tg128: median 10.13 tok/s, samples 10.13, 10.20, 10.12 
+[2026-10-10 23:01:35] done
