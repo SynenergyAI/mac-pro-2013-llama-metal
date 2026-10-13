@@ -1,0 +1,20 @@
+Qwen3-8B Q4_K_M, Vulkan/MoltenVK, two cards (-sm layer -ts 1,1), context window 12288.
+Per request: wall s, server s, prompt tokens, pp tok/s, tg tok/s. Request texts and answers removed.
+
+## -ub 1024 (source: q3_2card_run.log)
+  wall 213 s / server 213 s · prompt 1763 tok · pp 12.5 · tg 2.8
+  wall 247 s / server 247 s · prompt 2838 tok · pp 13.1 · tg 2.7
+  server log, error lines (source: q3_2card.log):
+    line 57: [mvk-error] VK_TIMEOUT: Lost VkDevice after MTLCommandBuffer "vkQueueSubmit MTLCommandBuffer on Queue 0-0" execution failed (code 2): Caused GPU Timeout Error (00000002:kIOAccelCommandBufferCallbackEr
+    line 60: 10.57.909.686 E srv update_slots: decode() failed: vk::Device::waitForFences: ErrorDeviceLost
+    line 61: 10.57.909.692 E srv send_error: task id = 396, error: decode() failed: vk::Device::waitForFences: ErrorDeviceLost
+    line 82: libc++abi: terminating with uncaught exception of type vk::DeviceLostError: vk::Queue::submit: ErrorDeviceLost
+  server command: llama-server -m Qwen_Qwen3-8B-Q4_K_M.gguf -ngl 99 -dev Vulkan0,Vulkan1 -sm layer -ts 1,1 -c 12288 -np 1 -t 4 -fa off -ub 1024 -b 2048 --cache-ram 0 --reasoning off --no-webui
+
+## -ub 512 (source: q3_2card_ub512_run.log)
+  wall 35 s / server 35 s · prompt 1763 tok · pp 88.0 · tg 12.6
+  wall 43 s / server 43 s · prompt 2838 tok · pp 89.5 · tg 11.8
+  wall 57 s / server 57 s · prompt 4106 tok · pp 94.1 · tg 11.1
+  wall 84 s / server 84 s · prompt 5961 tok · pp 96.9 · tg 10.0
+  wall 128 s / server 128 s · prompt 10010 tok · pp 94.2 · tg 8.2
+  TOTAL: 348 s

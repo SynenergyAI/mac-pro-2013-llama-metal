@@ -1,0 +1,9 @@
+Pause after each request caused by the host prompt cache, Vulkan/MoltenVK, Qwen2.5-7B-Instruct Q4_K_M, one card (source: gap_run.log).
+Per request: wall time / server compute time, seconds, 3 requests in a row.
+
+default        extra flag (no extra flag)    wall/compute for 3 requests: 34/34 64/42 86/62
+   server command: GGML_VK_VISIBLE_DEVICES=0 llama-server -m Qwen2.5-7B-Instruct-Q4_K_M.gguf -ngl 99 -c 8192 -np 1 -t 4 -fa off --no-webui <extra flag>
+nocache        extra flag --cache-ram 0      wall/compute for 3 requests: 34/34 42/42 62/62
+   server command: GGML_VK_VISIBLE_DEVICES=0 llama-server -m Qwen2.5-7B-Instruct-Q4_K_M.gguf -ngl 99 -c 8192 -np 1 -t 4 -fa off --no-webui <extra flag>
+nocacheprompt  extra flag --no-cache-prompt  wall/compute for 3 requests: 34/34 71/50 93/69
+   server command: GGML_VK_VISIBLE_DEVICES=0 llama-server -m Qwen2.5-7B-Instruct-Q4_K_M.gguf -ngl 99 -c 8192 -np 1 -t 4 -fa off --no-webui <extra flag>

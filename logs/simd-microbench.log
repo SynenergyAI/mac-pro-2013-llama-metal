@@ -1,0 +1,95 @@
+SIMD reduction microbenchmark, Metal, FirePro D700 (device 0). 4096 threadgroups x 64 threads, 256 reductions per thread.
+Five separate runs (source: simdtest_run1..5.log). Times are GPU time, best of 5 repetitions inside each run.
+
+## run 1
+device 0: AMD Radeon HD - FirePro D700
+k_info: SIMD width = 64
+k_simdsum  correctness: OK (errors 0)
+k_shdown   correctness: OK (errors 0)
+k_shxor    correctness: OK (errors 0)
+k_quad     correctness: OK (errors 0)
+k_bcast    correctness: OK (errors 0)
+k_tg       correctness: OK (errors 0)
+k_shx16    correctness: OK (errors 0)
+p_simdsum  time (256 reductions x 4096 groups): 993 us
+p_shxor    time (256 reductions x 4096 groups): 11907 us
+p_shx16    time (256 reductions x 4096 groups): 1645 us
+p_quad     time (256 reductions x 4096 groups): 2064 us
+p_tg       time (256 reductions x 4096 groups): 2064 us
+p_tgflat   time (256 reductions x 4096 groups): 5635 us
+
+## run 2
+device 0: AMD Radeon HD - FirePro D700
+k_info: SIMD width = 64
+k_simdsum  correctness: OK (errors 0)
+k_shdown   correctness: OK (errors 0)
+k_shxor    correctness: OK (errors 0)
+k_quad     correctness: OK (errors 0)
+k_bcast    correctness: OK (errors 0)
+k_tg       correctness: OK (errors 0)
+k_shx16    correctness: OK (errors 0)
+p_simdsum  time (256 reductions x 4096 groups): 993 us
+p_shxor    time (256 reductions x 4096 groups): 11895 us
+p_shx16    time (256 reductions x 4096 groups): 1674 us
+p_quad     time (256 reductions x 4096 groups): 2059 us
+p_tg       time (256 reductions x 4096 groups): 2062 us
+p_tgflat   time (256 reductions x 4096 groups): 5638 us
+
+## run 3
+device 0: AMD Radeon HD - FirePro D700
+k_info: SIMD width = 64
+k_simdsum  correctness: OK (errors 0)
+k_shdown   correctness: OK (errors 0)
+k_shxor    correctness: OK (errors 0)
+k_quad     correctness: OK (errors 0)
+k_bcast    correctness: OK (errors 0)
+k_tg       correctness: OK (errors 0)
+k_shx16    correctness: OK (errors 0)
+p_simdsum  time (256 reductions x 4096 groups): 1025 us
+p_shxor    time (256 reductions x 4096 groups): 11914 us
+p_shx16    time (256 reductions x 4096 groups): 1681 us
+p_quad     time (256 reductions x 4096 groups): 2063 us
+p_tg       time (256 reductions x 4096 groups): 2067 us
+p_tgflat   time (256 reductions x 4096 groups): 5628 us
+
+## run 4
+device 0: AMD Radeon HD - FirePro D700
+k_info: SIMD width = 64
+k_simdsum  correctness: OK (errors 0)
+k_shdown   correctness: OK (errors 0)
+k_shxor    correctness: OK (errors 0)
+k_quad     correctness: OK (errors 0)
+k_bcast    correctness: OK (errors 0)
+k_tg       correctness: OK (errors 0)
+k_shx16    correctness: OK (errors 0)
+p_simdsum  time (256 reductions x 4096 groups): 1010 us
+p_shxor    time (256 reductions x 4096 groups): 11898 us
+p_shx16    time (256 reductions x 4096 groups): 1644 us
+p_quad     time (256 reductions x 4096 groups): 2049 us
+p_tg       time (256 reductions x 4096 groups): 2072 us
+p_tgflat   time (256 reductions x 4096 groups): 5598 us
+
+## run 5
+device 0: AMD Radeon HD - FirePro D700
+k_info: SIMD width = 64
+k_simdsum  correctness: OK (errors 0)
+k_shdown   correctness: OK (errors 0)
+k_shxor    correctness: OK (errors 0)
+k_quad     correctness: OK (errors 0)
+k_bcast    correctness: OK (errors 0)
+k_tg       correctness: OK (errors 0)
+k_shx16    correctness: OK (errors 0)
+p_simdsum  time (256 reductions x 4096 groups): 985 us
+p_shxor    time (256 reductions x 4096 groups): 11897 us
+p_shx16    time (256 reductions x 4096 groups): 1663 us
+p_quad     time (256 reductions x 4096 groups): 2050 us
+p_tg       time (256 reductions x 4096 groups): 2058 us
+p_tgflat   time (256 reductions x 4096 groups): 5628 us
+
+## medians over the 5 runs (us)
+p_simdsum  median 993  min 985  all [993, 993, 1025, 1010, 985]
+p_shxor    median 11898  min 11895  all [11907, 11895, 11914, 11898, 11897]
+p_shx16    median 1663  min 1644  all [1645, 1674, 1681, 1644, 1663]
+p_quad     median 2059  min 2049  all [2064, 2059, 2063, 2049, 2050]
+p_tg       median 2064  min 2058  all [2064, 2062, 2067, 2072, 2058]
+p_tgflat   median 5628  min 5598  all [5635, 5638, 5628, 5598, 5628]

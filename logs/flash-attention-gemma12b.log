@@ -1,0 +1,13 @@
+Flash attention on/off, gemma-4-12B QAT q4_0, Vulkan/MoltenVK, two cards (-ts 4,6 -ub 512), context 17408, one prompt of 16030 tokens.
+Sources: vram_base.json / vram_fa.json (numeric fields only), vram_srv_base.log / vram_srv_fa.log (timing lines), vramrun.log (flags).
+
+run flags: === base: -ts 4,6 -ub 512 -fa off
+run flags: === fa: -ts 4,6 -ub 512 -fa on
+
+## base: wall 297.6 s · pp 66.2 tok/s · tg 5.9 tok/s · prompt 16030 tok · min free VRAM card0 1.67 GiB, card1 0.47 GiB
+   vram_srv_base.log line 43: prompt eval time = 242301.19 ms / 16030 tokens ( 15.12 ms per token, 66.16 tokens per second)
+   vram_srv_base.log line 44: eval time = 55273.10 ms / 328 tokens ( 169.03 ms per token, 5.92 tokens per second)
+
+## fa: wall 1066.0 s · pp 17.9 tok/s · tg 2.2 tok/s · prompt 16030 tok · min free VRAM card0 2.35 GiB, card1 1.27 GiB
+   vram_srv_fa.log line 68: prompt eval time = 894829.48 ms / 16030 tokens ( 55.82 ms per token, 17.91 tokens per second)
+   vram_srv_fa.log line 69: eval time = 171107.05 ms / 383 tokens ( 447.92 ms per token, 2.23 tokens per second)

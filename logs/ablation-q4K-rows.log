@@ -1,0 +1,9 @@
+MUL_MAT q4_K 4096x14336 (m=4096, n=1, k=14336) perf, test-backend-ops, Metal, one card.
+nr0_1 = kernel built with 1 row per SIMD group; nr0_2 = 2 rows (source: abl_q4K_nr0_{1,2}_run{1,2,3}.log).
+
+nr0_1 run1: 2556 runs - 557.21 us/run - 117.44 MFLOP/run - 210.76 GFLOPS
+nr0_1 run2: 2556 runs - 551.37 us/run - 117.44 MFLOP/run - 213.00 GFLOPS
+nr0_1 run3: 2556 runs - 555.12 us/run - 117.44 MFLOP/run - 211.56 GFLOPS
+nr0_2 run1: 2556 runs - 444.47 us/run - 117.44 MFLOP/run - 264.22 GFLOPS
+nr0_2 run2: 2556 runs - 445.82 us/run - 117.44 MFLOP/run - 263.42 GFLOPS
+nr0_2 run3: 2556 runs - 443.06 us/run - 117.44 MFLOP/run - 265.07 GFLOPS

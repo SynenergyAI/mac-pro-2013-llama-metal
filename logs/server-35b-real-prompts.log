@@ -1,0 +1,104 @@
+Qwen3.6-35B-A3B-MTP UD-Q4_K_M, llama-server, Vulkan/MoltenVK, two cards, -t 8. Real prompts (non-public long texts); NO prompt or answer text here.
+Per request: prompt tokens, output tokens, pp tok/s, tg tok/s, wall s, TTFT s (= prompt tokens / pp), finish.
+
+## A: 10 expert layers on the GPUs (-ot), -c 17408, 45 requests (source: eval45_q36mtp10.json)
+  req  1: prompt    736 · out  150 · pp  33.9 · tg  10.8 · wall    35.5 · TTFT 21.7 · stop
+  req  2: prompt    723 · out  169 · pp  41.6 · tg  10.8 · wall    32.9 · TTFT 17.4 · stop
+  req  3: prompt    731 · out  153 · pp  41.7 · tg  10.8 · wall    31.7 · TTFT 17.5 · stop
+  req  4: prompt    583 · out   17 · pp  36.7 · tg  10.6 · wall    17.4 · TTFT 15.9 · stop
+  req  5: prompt   1046 · out  163 · pp  43.4 · tg  10.8 · wall    39.1 · TTFT 24.1 · stop
+  req  6: prompt    688 · out  144 · pp  40.2 · tg  10.8 · wall    30.3 · TTFT 17.1 · stop
+  req  7: prompt    680 · out  133 · pp  39.6 · tg  10.8 · wall    29.3 · TTFT 17.2 · stop
+  req  8: prompt    944 · out  107 · pp  41.2 · tg  10.8 · wall    32.7 · TTFT 22.9 · stop
+  req  9: prompt    688 · out  135 · pp  40.0 · tg  10.8 · wall    29.6 · TTFT 17.2 · stop
+  req 10: prompt    846 · out  151 · pp  39.1 · tg  10.8 · wall    35.6 · TTFT 21.6 · stop
+  req 11: prompt   1372 · out  207 · pp  40.7 · tg  10.8 · wall    52.8 · TTFT 33.7 · stop
+  req 12: prompt   1750 · out  201 · pp  42.0 · tg  10.8 · wall    60.3 · TTFT 41.7 · stop
+  req 13: prompt   1201 · out  164 · pp  41.0 · tg  10.8 · wall    44.4 · TTFT 29.3 · stop
+  req 14: prompt   1209 · out  195 · pp  43.0 · tg  10.8 · wall    46.1 · TTFT 28.1 · stop
+  req 15: prompt   1785 · out  215 · pp  43.3 · tg  10.7 · wall    61.1 · TTFT 41.2 · stop
+  req 16: prompt   1626 · out  235 · pp  42.3 · tg  10.8 · wall    60.1 · TTFT 38.4 · stop
+  req 17: prompt   1564 · out  226 · pp  44.8 · tg  10.8 · wall    55.7 · TTFT 34.9 · stop
+  req 18: prompt   1184 · out  150 · pp  42.0 · tg  10.8 · wall    42.0 · TTFT 28.2 · stop
+  req 19: prompt   1523 · out  252 · pp  43.8 · tg  10.8 · wall    58.0 · TTFT 34.8 · stop
+  req 20: prompt   1997 · out  226 · pp  43.4 · tg  10.7 · wall    67.0 · TTFT 46.0 · stop
+  req 21: prompt   2583 · out  288 · pp  43.8 · tg  10.6 · wall    86.0 · TTFT 59.0 · stop
+  req 22: prompt   3057 · out  195 · pp  45.1 · tg  10.6 · wall    86.2 · TTFT 67.8 · stop
+  req 23: prompt   2640 · out  204 · pp  43.0 · tg  10.6 · wall    80.5 · TTFT 61.4 · stop
+  req 24: prompt   2119 · out  228 · pp  42.7 · tg  10.7 · wall    70.8 · TTFT 49.6 · stop
+  req 25: prompt   1974 · out  237 · pp  43.3 · tg  10.7 · wall    67.6 · TTFT 45.6 · stop
+  req 26: prompt   3168 · out  244 · pp  43.4 · tg  10.5 · wall    96.1 · TTFT 73.0 · stop
+  req 27: prompt   2514 · out  191 · pp  43.1 · tg  10.7 · wall    76.1 · TTFT 58.3 · stop
+  req 28: prompt   2868 · out  253 · pp  41.7 · tg  10.6 · wall    92.4 · TTFT 68.8 · stop
+  req 29: prompt   2611 · out  211 · pp  42.8 · tg  10.7 · wall    80.7 · TTFT 61.0 · stop
+  req 30: prompt   3484 · out  237 · pp  42.7 · tg  10.6 · wall   103.9 · TTFT 81.6 · stop
+  req 31: prompt   4771 · out  296 · pp  43.4 · tg  10.4 · wall   138.3 · TTFT 109.9 · stop
+  req 32: prompt   4640 · out  202 · pp  44.1 · tg  10.4 · wall   124.4 · TTFT 105.2 · stop
+  req 33: prompt   8926 · out  242 · pp  42.4 · tg  10.0 · wall   234.8 · TTFT 210.5 · stop
+  req 34: prompt   4719 · out  219 · pp  43.9 · tg  10.4 · wall   128.5 · TTFT 107.5 · stop
+  req 35: prompt   5960 · out  282 · pp  42.8 · tg  10.3 · wall   166.7 · TTFT 139.3 · stop
+  req 36: prompt   4253 · out  289 · pp  44.4 · tg  10.5 · wall   123.3 · TTFT 95.8 · stop
+  req 37: prompt   4973 · out  295 · pp  43.1 · tg  10.3 · wall   143.9 · TTFT 115.4 · stop
+  req 38: prompt   6049 · out  241 · pp  42.9 · tg  10.3 · wall   164.3 · TTFT 141.0 · stop
+  req 39: prompt   5394 · out  248 · pp  43.8 · tg  10.3 · wall   147.2 · TTFT 123.2 · stop
+  req 40: prompt   4734 · out  201 · pp  42.9 · tg  10.4 · wall   129.5 · TTFT 110.3 · stop
+  req 41: prompt  14366 · out  182 · pp  41.4 · tg   9.5 · wall   366.4 · TTFT 347.0 · stop
+  req 42: prompt  10632 · out  265 · pp  42.7 · tg   9.8 · wall   276.0 · TTFT 249.0 · stop
+  req 43: prompt  15817 · out  231 · pp  41.4 · tg   9.3 · wall   406.7 · TTFT 382.1 · stop
+  req 44: prompt  16007 · out  312 · pp  40.5 · tg   9.3 · wall   428.8 · TTFT 395.2 · stop
+  req 45: prompt  15927 · out  319 · pp  41.2 · tg   9.3 · wall   421.1 · TTFT 386.6 · stop
+  MEDIANS: pp 42.7 · tg 10.7 · wall 76.1 · TTFT 58.3 · prompt 2514 · out 215
+
+## B: all experts on CPU (-ncmoe 41), -c 65536, the same 45 requests without truncation (source: eval45_cpu65k.json)
+  req  1: prompt    736 · out  121 · pp  30.0 · tg   9.9 · wall    36.7 · TTFT 24.5 · stop
+  req  2: prompt    723 · out  167 · pp  37.8 · tg   9.9 · wall    35.8 · TTFT 19.1 · stop
+  req  3: prompt    731 · out  175 · pp  37.9 · tg   9.9 · wall    36.9 · TTFT 19.3 · stop
+  req  4: prompt    583 · out   60 · pp  33.3 · tg   9.9 · wall    23.5 · TTFT 17.5 · stop
+  req  5: prompt   1046 · out  173 · pp  39.7 · tg   9.9 · wall    43.7 · TTFT 26.3 · stop
+  req  6: prompt    688 · out  103 · pp  36.6 · tg   9.9 · wall    29.1 · TTFT 18.8 · stop
+  req  7: prompt    680 · out  134 · pp  36.0 · tg  10.0 · wall    32.2 · TTFT 18.9 · stop
+  req  8: prompt    944 · out  126 · pp  37.3 · tg  10.0 · wall    37.9 · TTFT 25.3 · stop
+  req  9: prompt    688 · out  112 · pp  36.3 · tg  10.0 · wall    30.1 · TTFT 19.0 · stop
+  req 10: prompt    846 · out  146 · pp  35.4 · tg   9.9 · wall    38.5 · TTFT 23.9 · stop
+  req 11: prompt   1372 · out  196 · pp  36.9 · tg  10.0 · wall    56.7 · TTFT 37.2 · stop
+  req 12: prompt   1750 · out  176 · pp  38.1 · tg   9.9 · wall    63.6 · TTFT 45.9 · stop
+  req 13: prompt   1201 · out  119 · pp  37.3 · tg  10.0 · wall    44.0 · TTFT 32.2 · stop
+  req 14: prompt   1209 · out   78 · pp  39.2 · tg   9.9 · wall    38.6 · TTFT 30.8 · stop
+  req 15: prompt   1785 · out  223 · pp  39.5 · tg   9.9 · wall    67.6 · TTFT 45.2 · stop
+  req 16: prompt   1626 · out  244 · pp  38.4 · tg   9.9 · wall    66.8 · TTFT 42.3 · stop
+  req 17: prompt   1564 · out  242 · pp  40.9 · tg  10.0 · wall    62.4 · TTFT 38.2 · stop
+  req 18: prompt   1184 · out  148 · pp  38.2 · tg  10.0 · wall    45.8 · TTFT 31.0 · stop
+  req 19: prompt   1523 · out  298 · pp  40.0 · tg   9.9 · wall    68.0 · TTFT 38.1 · stop
+  req 20: prompt   1997 · out  241 · pp  39.6 · tg   9.9 · wall    74.7 · TTFT 50.4 · stop
+  req 21: prompt   2583 · out  258 · pp  39.9 · tg   9.8 · wall    90.9 · TTFT 64.7 · stop
+  req 22: prompt   3057 · out  210 · pp  41.1 · tg   9.8 · wall    95.7 · TTFT 74.4 · stop
+  req 23: prompt   2640 · out  191 · pp  39.1 · tg   9.8 · wall    86.8 · TTFT 67.5 · stop
+  req 24: prompt   2119 · out  200 · pp  38.8 · tg   9.9 · wall    74.8 · TTFT 54.6 · stop
+  req 25: prompt   1974 · out  243 · pp  39.5 · tg   9.9 · wall    74.4 · TTFT 50.0 · stop
+  req 26: prompt   3168 · out  220 · pp  39.5 · tg   9.8 · wall   102.6 · TTFT 80.2 · stop
+  req 27: prompt   2514 · out  217 · pp  39.4 · tg   9.8 · wall    85.9 · TTFT 63.8 · stop
+  req 28: prompt   2868 · out  254 · pp  38.0 · tg   9.8 · wall   101.3 · TTFT 75.5 · stop
+  req 29: prompt   2611 · out  235 · pp  39.0 · tg   9.8 · wall    90.7 · TTFT 66.9 · stop
+  req 30: prompt   3484 · out  270 · pp  39.0 · tg   9.8 · wall   116.9 · TTFT 89.3 · stop
+  req 31: prompt   4771 · out  317 · pp  39.6 · tg   9.6 · wall   153.3 · TTFT 120.5 · stop
+  req 32: prompt   4640 · out  279 · pp  40.3 · tg   9.6 · wall   144.1 · TTFT 115.1 · stop
+  req 33: prompt   8926 · out  245 · pp  38.7 · tg   9.3 · wall   257.3 · TTFT 230.6 · stop
+  req 34: prompt   4719 · out  219 · pp  40.0 · tg   9.7 · wall   140.4 · TTFT 118.0 · stop
+  req 35: prompt   5960 · out  269 · pp  39.0 · tg   9.5 · wall   180.9 · TTFT 152.8 · stop
+  req 36: prompt   4253 · out  225 · pp  40.5 · tg   9.7 · wall   128.0 · TTFT 105.0 · stop
+  req 37: prompt   4973 · out  272 · pp  39.2 · tg   9.6 · wall   155.2 · TTFT 126.9 · stop
+  req 38: prompt   6049 · out  251 · pp  39.1 · tg   9.5 · wall   180.9 · TTFT 154.7 · stop
+  req 39: prompt   5394 · out  213 · pp  39.9 · tg   9.6 · wall   157.5 · TTFT 135.2 · stop
+  req 40: prompt   4734 · out  204 · pp  39.2 · tg   9.6 · wall   142.0 · TTFT 120.8 · stop
+  req 41: prompt  14366 · out  247 · pp  37.8 · tg   8.8 · wall   408.1 · TTFT 380.1 · stop
+  req 42: prompt  10632 · out  239 · pp  39.0 · tg   9.1 · wall   299.0 · TTFT 272.6 · stop
+  req 43: prompt  18585 · out  257 · pp  37.4 · tg   8.5 · wall   527.0 · TTFT 496.9 · stop
+  req 44: prompt  19451 · out  327 · pp  36.9 · tg   8.4 · wall   565.7 · TTFT 527.1 · stop
+  req 45: prompt  18408 · out  370 · pp  37.4 · tg   8.5 · wall   535.5 · TTFT 492.2 · stop
+  MEDIANS: pp 39.0 · tg 9.8 · wall 85.9 · TTFT 63.8 · prompt 2514 · out 220
+
+## C: long synthetic prompt ~37.5k tokens, config B (source: eval_long.json)
+  req  1: prompt  37549 · out  266 · pp  34.3 · tg   7.3 · wall  1129.9 · TTFT 1094.7 · stop
+
+## D: long synthetic prompt ~62k tokens, config B (source: eval_long60k.json)
+  req  1: prompt  61733 · out  216 · pp  31.3 · tg   6.1 · wall  2009.7 · TTFT 1972.3 · stop
