@@ -4,7 +4,7 @@
 
 Eight patches that make llama.cpp's Metal backend compute correctly on the AMD FirePro D700 (GCN1, 64-wide SIMD). Every number below points to a log line in `logs/`.
 
-Article: `<ARTICLE_URL>`
+Article: [English](https://synenergy.ai/research/mac-pro-2013-35b-local/) · [Українською](https://synenergy.ai/ua/research/mac-pro-2013-35b-local/)
 
 ## The problem
 
